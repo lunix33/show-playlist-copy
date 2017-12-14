@@ -46,6 +46,10 @@ The playlist is converted as a unified mkv file.
 ]
 ```
 
+## Note
+
+When using input file, up to five (5) concurrent copies will occure.
+
 # File structure
 
 The files created by the utility will be stored as followed.
