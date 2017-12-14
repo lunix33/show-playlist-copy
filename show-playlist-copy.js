@@ -12,10 +12,27 @@ let entries = [], current = 0;
 
 (function main(argv) {
 	if (argv.help || argv.h) {
-		console.log('Usages:');
-		console.log('\t(...) -h');
-		console.log('\t(...) -f file');
-		console.log('\t(...) [--url|-u playlist_url] [--title|-t title] [--season|-s season_num] [--episode|-e episode_num]');
+		console.log(`
+ Usages:
+	(...) --help
+
+	(...) [--destination <destination path>] 
+	       --file <file path>
+
+	(...) [--destination <destination path>] 
+	       --url <playlist url> 
+	       --title <title> 
+	       --season <season number> 
+	       --episode <episode number>
+
+ --help        | -h : Display this help menu.
+ --destination | -d : Created files destination.
+ --file        | -f : The path to the input file.
+ --url         | -u : The url of the file playlist file.
+ --title       | -t : The title of the show.
+ --season      | -s : The season number (ex: 01).
+ --episode     | -e : The episode number (ex: 06).
+ `);
 	} else if (argv.file || argv.f) {
 		entries = require(argv.file || argv.f);
 		for (let i = 0; i < concurrent; i++) {

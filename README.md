@@ -2,6 +2,8 @@ This utility copy a playlist file (m3u8) through ffmpeg
 
 The playlist is converted as a unified mkv file.
 
+*Note*: Only work on linux since the location of ffmpeg is detected through the `which` command.
+
 # Install
 
 1. Copy the repository.
