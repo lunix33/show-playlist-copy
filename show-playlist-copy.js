@@ -5,7 +5,7 @@ const subprocess = require('child_process');
 const argv = require('minimist')(process.argv.splice(2));
 
 const ffmpeg_path = subprocess.execSync('which ffmpeg').toString().slice(0, -1);
-const base_path =  argv.d || argv.destination || process.env.PL_DESTINATION;
+const base_path =  argv.d || argv.destination || process.env.PL_DESTINATION || './';
 const concurrent = 5;
 
 let entries = [], current = 0;
