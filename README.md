@@ -1,8 +1,11 @@
-This utility copy a playlist file (m3u8) through ffmpeg
+The utility allow to to copy video files from URL, or unify video playlist file (m3u8) into one video file.
 
-The playlist is converted as a unified mkv file.
+This utility follow a TV show schema and ensure good recognition from TVDB Agent of Plex and Emby (for more detail see the `File structure` section).
 
-*Note*: Only work on linux since the location of ffmpeg is detected through the `which` command.
+# Dependancies
+
+* [Node.js](https://nodejs.org/)
+* [FFMPEG](https://www.ffmpeg.org/)
 
 # Install
 
@@ -16,12 +19,18 @@ The playlist is converted as a unified mkv file.
 
 `PL_DESTINATION` : The destination of the files.
 
+`FFMPEG_PATH`    : Path to the FFMPEG executable.
+
 ## Arguments
 
-* `playlist-copy.js [-d <destination>] -f <file path>`
-* `playlist-copy.js [-d <destination>] -u <playlist path> -t <title> -s <season number> -e <episode number>`
+* `playlist-copy.js [-c <concurrent instances>] -f <file path>`
+* `playlist-copy.js -u <playlist path> -t <title> -s <season number> -e <episode number>`
 
 `-d` | `--destination`: The destination of the files.
+
+`-p` | `--program`    : The path to the ffmpeg executable.
+
+`-c` | `--concurrent` : Number of concurrent copies. (default: 5)
 
 `-f` | `--file`       : Input file path.
 
@@ -48,7 +57,9 @@ The playlist is converted as a unified mkv file.
 
 ## Note
 
-When using input file, up to five (5) concurrent copies will occure.
+The path to the FFMPEG executable try to be automatically determined with `where` (windows) or `command -v` (linux)
+
+If FFMPEG is not part of your `PATH`, you can use the `FFMPEG_PATH` environnement variable or the `--program` argument.
 
 # File structure
 

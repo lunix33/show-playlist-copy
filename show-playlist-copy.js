@@ -1,12 +1,30 @@
 #!/usr/bin/env node
 
-const process = require('process');
 const subprocess = require('child_process');
 const argv = require('minimist')(process.argv.splice(2));
 
-const ffmpeg_path = subprocess.execSync('which ffmpeg').toString().slice(0, -1);
+/*
+ * Find FFMPEG location.
+ * Order:
+ * 	1. p or program argument.
+ * 	2. FFMPEG_PATH environnement variable.
+ * 	3. through system specific location command (`where` for windows, and `command -v` for unix).
+ */
+let ffmpeg_path = argv.p || argv.program ||
+	                process.env.FFMPEG_PATH;
+try {
+	if (/^win/.test(process.platform)) {
+		ffmpeg_path = ffmpeg_path || subprocess.execSync('where ffmpeg').toString()
+	} else {
+		ffmpeg_path = ffmpeg_path || subprocess.execSync('command -v ffmpeg').toString().slice(0, -1);
+	}
+} catch (e) {
+	console.log('Unable to find FFMPEG in $PATH.');
+	process.exit(1);
+}
+
 const base_path =  argv.d || argv.destination || process.env.PL_DESTINATION || './';
-const concurrent = 5;
+const concurrent = argv.c || argv.concurrent || 5;
 
 let entries = [], current = 0;
 
@@ -16,10 +34,13 @@ let entries = [], current = 0;
  Usages:
 	(...) --help
 
-	(...) [--destination <destination path>] 
+	(...) [--destination <destination path>]
+	      [--program <ffmpeg location>]
+	      [--concurrent <concurrent instances>]
 	       --file <file path>
 
-	(...) [--destination <destination path>] 
+	(...) [--destination <destination path>]
+	      [--program <ffmpeg location>]
 	       --url <playlist url> 
 	       --title <title> 
 	       --season <season number> 
@@ -27,8 +48,10 @@ let entries = [], current = 0;
 
  --help        | -h : Display this help menu.
  --destination | -d : Created files destination.
+ --program     | -p : The ffmpeg location.
+ --concurrent  | -c : Concurrent copies.
  --file        | -f : The path to the input file.
- --url         | -u : The url of the file playlist file.
+ --url         | -u : The url of the input file (m3u8 or video file).
  --title       | -t : The title of the show.
  --season      | -s : The season number (ex: 01).
  --episode     | -e : The episode number (ex: 06).

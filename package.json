@@ -2,7 +2,9 @@
 	"name": "show-playlist-copy",
 	"description": "Copy a playlist file through ffmpeg.",
 	"version": "1.0.0",
-	"keywords": ["utils"],
+	"keywords": [
+		"utils"
+	],
 	"license": "MIT",
 	"repository": {
 		"type": "git",
@@ -10,8 +12,8 @@
 	},
 	"author": "Patrick Bergeron",
 	"contributors": [],
-	"scripts":{
-		"start":"node show-playlist-copy.js"
+	"scripts": {
+		"start": "node show-playlist-copy.js"
 	},
 	"dependencies": {
 		"minimist": "*"
