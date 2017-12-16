@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const subprocess = require('child_process');
+const path = require('path');
 const argv = require('minimist')(process.argv.splice(2));
 
 /*
@@ -14,7 +15,7 @@ let ffmpeg_path = argv.p || argv.program ||
 	                process.env.FFMPEG_PATH;
 try {
 	if (/^win/.test(process.platform)) {
-		ffmpeg_path = ffmpeg_path || subprocess.execSync('where ffmpeg').toString()
+		ffmpeg_path = ffmpeg_path || subprocess.execSync('where ffmpeg').toString().slice(0, -2);
 	} else {
 		ffmpeg_path = ffmpeg_path || subprocess.execSync('command -v ffmpeg').toString().slice(0, -1);
 	}
@@ -83,36 +84,42 @@ function run(id, playlist_url, title, season, episode) {
 	season = pad(season);
 	episode = pad(episode);
 
-	const path = `${base_path}/${title}/Season ${season}/`
+	const file_path = path.join(base_path, title, `Season ${season}`);
 	const filename = `${title} S${season}E${episode}.mkv`;
-	const full = `${path}${filename}`;
+	const full = path.join(file_path, filename);
 
 	// Create the folder
-	subprocess.execSync(`mkdir -p "${path}"`);
+	if (/^win/.test(process.platform)) {
+		try {
+			subprocess.execSync(`mkdir "${file_path}"`);
+		} catch (e) { /* Ignore error */ }
+	} else
+		subprocess.execSync(`mkdir -p "${file_path}"`);
+	
 	// Start copy process.
-	const process = subprocess.spawn(ffmpeg_path, [
+	const ffmpeg_process = subprocess.spawn(ffmpeg_path, [
 		'-i', playlist_url,
 		'-c', 'copy',
 		full
 	]);
 
 	// Action on output message.
-	process.stdout.on('data', (data) => {
+	ffmpeg_process.stdout.on('data', (data) => {
 		console.log(`[${id}: out] ${data}`);
 	});
 
 	// Action on error message.
-	process.stderr.on('data', (data) => {
+	ffmpeg_process.stderr.on('data', (data) => {
 		console.log(`[${id}: err] ${data}`);
 	});
 	
 	// Action when process is closing.
-	process.on('close', (code) => {
+	ffmpeg_process.on('close', (code) => {
 		console.log(`[${id}: ifo] ${title} S${season}E${episode} done.`);
 		setTimeout(next);
 	});
 
-	process.on('error', (e) => {
+	ffmpeg_process.on('error', (e) => {
 		console.log(e);
 	});
 }
