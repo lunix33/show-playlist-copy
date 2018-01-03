@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<link rel="stylesheet"
+		      href="list_manage.css" />
+		<script type="application/javascript"
+		        src="list_manage.js"></script>
+		
+		<title>Show Playlist Copy - List management</title>
+	</head>
+	<body>
+		<div id="manual">
+			<div>
+				<div class="fieldset">
+					<label for="title">Title</label>
+					<input type="text"
+						   id="title"
+						   name="title" />
+				</div>
+				<div class="fieldset half">
+					<label for="season">Season</label>
+					<input type="text"
+						   id="season"
+						   name="season" />
+				</div>
+				<div class="fieldset half">
+					<label for="episode">Episode</label>
+					<input type="text"
+						   id="episode"
+						   name="episode" />
+				</div>
+			</div>
+			<div>
+				<div class="fieldset">
+					<label for="url">URL</label>
+					<textarea id="url"
+							  name="url"></textarea>
+				</div>
+				<button id="add_btn" type="button">Add</button>
+			</div>
+		</div>
+	
+		<div id="list"></div>
+		
+		<div id="floater">
+			<p>Total entries: <span id="total"></span></p>
+			<a id="clear_link" href="#">Clear entries</a>
+			<a id="download_link" href="#">Download file</a>
+		</div>
+	</body>
+</html>

@@ -55,6 +55,18 @@ This utility follow a TV show schema and ensure good recognition from TVDB Agent
 ]
 ```
 
+### Chrome extension
+
+In the `chrome_ext` can be found a google chome extension (`chrome.crx`) allowing to generate the utility input file.
+
+The extension listen for media and playlist requests and expose them as potential stream to be added to the input file.
+
+The extension also allow to fully input all the entries manually.
+
+When all steams are in place, you can use the download button in the popup window or the list management page to save the list on the computer.
+
+*NOTE*: Because of an error with the latest stable release of chrome, the crx file was not generated. Will wait for a future release. For the time being, load the extense as an unpacked extension (developer mode must be active in the extension menu).
+
 ## Note
 
 The path to the FFMPEG executable try to be automatically determined with `where` (windows) or `command -v` (linux)

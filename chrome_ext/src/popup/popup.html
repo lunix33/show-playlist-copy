@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<link rel="stylesheet"
+		      href="popup.css" />
+		<script type="application/javascript"
+		        src="popup.js"></script>
+	</head>
+	<body>
+		<div id="info">
+			<h1>File information</h1>
+			<div class="fieldset">
+				<label for="title">Title</label>
+				<input type="text"
+				       id="title"
+					   name="title"
+					   placeholder="Ex: Game of Thrones" />
+			</div>
+			<div class="fieldset half">
+				<label for="title">Season</label>
+				<input type="number"
+				       id="season"
+					   name="season" />
+			</div>
+			<div class="fieldset half">
+				<label for="title">Episode</label>
+				<input type="number"
+				       id="episode"
+					   name="episode" />
+			</div>
+			<div class="clear"></div>
+		</div>
+		<p>Select a stream:</p>
+		<ul id="url_list"><li>None</li></ul>
+		<div id="menu">
+			<p>Total: <span id="total"></span></p>
+			<a id="list_link" href="../list_manage/list_manage.html" target="_blank">See list</a>
+			<div class="clear"></div>
+			<a id="download_link" href="#">Download the list</a>
+		</div>
+	</body>
+</html>

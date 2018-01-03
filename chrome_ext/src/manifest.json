@@ -1,0 +1,20 @@
+{
+	"name": "Show Playlist Copy",
+	"description": "Help to create copy playlist while navigating the web.",
+	"version": "0.0",
+	"manifest_version": 2,
+	"permissions": [
+		"downloads",
+		"webNavigation",
+		"webRequest",
+		"<all_urls>"
+	],
+	"background": {
+		"scripts": [ "background.js" ],
+		"persistent": true
+	},
+	"browser_action": {
+		"default_popup": "popup/popup.html",
+		"default_icon": "icon.png"
+	}
+}

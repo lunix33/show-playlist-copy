@@ -1,0 +1,101 @@
+html {
+	background-color: hsla(0, 0%, 98%, 1)
+}
+
+body {
+	margin: auto;
+	max-width: 1000px;
+	
+	border-left: 1px solid hsla(0, 0%, 30%, 1);
+	border-right: 1px solid hsla(0, 0%, 30%, 1);
+	background-color: hsla(0, 0%, 100%, 1);
+	padding: 15px 5px;
+}
+
+/* **** Manual input ******************************************************* */
+#manual {
+	display: flex;
+	border-bottom: 1px solid hsla(0, 0%, 30%, 1);
+	
+	width: 85%;
+	margin: auto;
+	padding: 0px 15px 5px 15px;
+}
+
+#manual > div {
+	float: left;
+	width: 50%;
+	margin: 0 5px 0 5px;
+}
+
+#manual button {
+	margin-top: 5px;
+	float: right;
+}
+
+.fieldset {
+	position: relative;
+}
+
+.fieldset label {
+	position: absolute;
+	font-size: 0.9em;
+	color: hsla(0, 0%, 30%, 1);
+}
+
+.fieldset input, .fieldset textarea {
+	margin-top: 15px;
+	width: 100%
+}
+
+.half {
+	width: 50%;
+	float: left;
+}
+
+/* **** List content ******************************************************* */
+#list > div {
+	border: 1px solid hsla(0, 0%, 30%, 1);
+	border-radius: 3px;
+	
+	display: flex;
+	
+	margin-top: 3px;
+}
+
+#list .leftPart {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	
+	padding: 5px;
+}
+
+#list .rightPart span {
+	font-style: italic;
+	color: hsla(0, 0%, 30%, 1);
+}
+
+#list .rightPart p {
+	margin: 0;
+}
+
+/* **** Floating mini menu ************************************************* */
+#floater {
+	width: 150px;
+	position: absolute;
+	right: 0;
+	bottom: 50px;
+	
+	padding: 5px;
+	
+	border: 1px solid hsla(0, 0%, 30%, 1);
+	border-right: none;
+	border-radius: 5px 0 0 5px;
+	background-color: hsla(0, 0%, 90%, 1);
+}
+
+#floater p, #floater a {
+	display: block;
+	margin: 0;
+}
